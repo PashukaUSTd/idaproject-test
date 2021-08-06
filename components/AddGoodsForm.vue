@@ -1,6 +1,6 @@
 <template>
 <div class="form-container">
-<h1>Добавление товара</h1>
+<h1 class="title">Добавление товара</h1>
   <form action="" class="form" @submit.prevent="">
     <div class="form-wrapper">
       <label for="good-title">
@@ -42,9 +42,10 @@ export default ({
 </script>
 
 <style lang="sass" scoped>
-  $form__bg: #FFFEFB
+  $input__box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1)
   $placeholder: rgba(180, 180, 180, 0.5)
   $button__text-color: #B4B4B4
+  $item__bg: #FFFEFB
   $button__bg: #EEEEEE
 
   .form-container
@@ -59,20 +60,20 @@ export default ({
     color: red
 
   .form
-    padding: 24px 24px
-    background-color: $form__bg
+    background-color: $item__bg
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02)
 
   .form-wrapper
     display: flex
     flex-direction: column
-    max-width: 332px
+    padding: 24px 24px
+    width: 332px
 
   .form__input
     width: 100%
     padding: 10px 16px
     margin-bottom: 16px
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1)
+    box-shadow: $input__box-shadow
     border: none
     border-radius: 4px
 
@@ -113,6 +114,4 @@ export default ({
     &:active
       transform: translateY(5px)
       box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3)
-
-
 </style>
