@@ -1,20 +1,43 @@
 <template>
-  <select class="filter position-absolute">
-    <option class="filter__option" value="0">
+<div class="filter-container" :class="{'focused': focused}">
+  <select class="filter" v-model="selected" @change="sort()" @focus="focused = true" @blur="focused = false">
+    <option class="filter__option" value="0" disabled>
       По умолчанию
     </option>
-    <option class="filter__option" value="1">
-      По умолчанию
-    </option>
-    <option class="filter__option" value="2">
-      По умолчанию
+    <option class="filter__option" v-for="option in options"
+     :value="option.id" :key="option.id">
+      {{ option.title }}
     </option>
   </select>
+</div>
 </template>
 
 
 <script>
-export default {}
+import options from '../static/data/options'
+
+export default {
+  data() {
+    return {
+      selected: '0',
+      focused: false,
+    }
+  },
+  methods: {
+    sort() {
+      console.log(this.selectedOption.value, this.selectedOption.min)
+      this.$store.commit('goods/sortByProp', this.selectedOption.value, this.selectedOption.min);
+    }
+  },
+  computed: {
+    options() {
+      return options;
+    },
+    selectedOption() {
+      return this.options.filter(e => e.id === this.selected)
+    },
+  }
+}
 </script>
 
 <style lang="sass" scoped>
@@ -22,20 +45,25 @@ export default {}
   $input__box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1)
   $placeholder: rgba(180, 180, 180, 0.7)
 
-  .filter
+  .filter-container
+    display: inline-block
+    padding: 10px 24px 10px 16px
     background-color: $item__bg
     box-shadow: $input__box-shadow
+    border-radius: 4px
+    cursor: pointer
+
+  .focused
+    box-shadow: 0 0 0 1pt #FF8484
+
+  .filter
     border: none
     border-radius: 4px
-    padding: 10px 24px 10px 16px
     font-weight: 400
     font-size: 12px
     line-height: 15px
     color: $placeholder
-
-  .position-absolute
-    position: absolute
-    top: 31px
-    right: 33px
-
+    cursor: pointer
+    &:focus
+      outline: none
 </style>

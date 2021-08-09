@@ -1,22 +1,30 @@
 <template>
-  <li class="card mb-16">
-    <img class="card__img" src="../assets/img/good-picture.jpeg" alt="Фото товара">
+<ul class="goods">
+  <li class="card mb-16" v-for="(good, index) in this.goods" :key="index">
+    <img class="card__img" :src="good.image" :alt="good.title">
     <div class="card-wrapper">
       <h3 class="card__title">
-        Наименование товара
+        {{ good.title }}
       </h3>
       <p class="card__description">
-        Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк
+        {{ good.description }}
       </p>
-      <span class="card__price">10 000 руб.</span>
+      <span class="card__price">{{ good.price }}</span>
     </div>
-    <button class="delete"></button>
+    <button class="delete" @click="deleteGood(good.id)"></button>
   </li>
+</ul>
 </template>
 
 <script>
-
-export default({})
+export default({
+  props:['goods'],
+  methods: {
+    deleteGood(id) {
+      this.$store.commit('goods/deleteGood', id);
+    }
+  }
+})
 </script>
 
 <style lang="sass" scoped>
@@ -42,9 +50,18 @@ export default({})
     cursor: pointer
     border-radius: 10px
     background-color: $delete
-    background-image: url('../assets/img/delete.svg')
+    background-image: url('../static/img/delete.svg')
     background-position: center center
     background-repeat: no-repeat
+
+  .goods
+    position: relative
+    display: flex
+    flex-wrap: wrap
+    margin-left: 332px
+    padding: 0
+    width: calc(100% - 332px)
+    list-style: none
 
   .card
    position: relative
@@ -61,6 +78,7 @@ export default({})
 
   .card__img
     width: 100%
+    height: 200px
 
   .card-wrapper
     padding-left: $margin
