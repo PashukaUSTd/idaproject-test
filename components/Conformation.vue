@@ -56,12 +56,15 @@ export default {
     &:focus
       outline: none
       box-shadow: 0 0 0 2pt#FF8484 !important
+    @media (max-width: 550px)
+      font-size: 12px
+      padding: .5rem 1.5rem
 
   .form-agree
     display: none
     position: fixed
     left: calc(50% - #{$width} / 2)
-    top: calc(50% - 150px)
+    top: calc(50% - 100px)
     z-index: 10
     width: $width
     padding-bottom: 20px
@@ -69,12 +72,18 @@ export default {
     background-color: #FFFEFB
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2)
 
+    @media (max-width: 550px)
+      width: (#{$width} / 2)
+      left: calc(50% - #{$width} / 4)
+
   .appear-form
     display: block
 
   .form-agree__title
     font-size: 24px
     text-align: center
+    @media (max-width: 550px)
+      font-size: 20px
 
   .form-agree__wrapper
     display: flex

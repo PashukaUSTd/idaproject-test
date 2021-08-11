@@ -130,7 +130,6 @@ export default ({
       padding: 24px 16px
       width: 166px
     @media (max-width: 360px)
-      padding: 24px 16px
       width: 136px
 
   .form__input
