@@ -17,4 +17,6 @@ export default ({})
     max-width: 1440px
     padding: 0 32px
     margin: 0 auto
+    @media (max-width: 550px)
+      padding: 0 14px
 </style>

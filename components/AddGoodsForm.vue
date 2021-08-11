@@ -46,7 +46,7 @@ export default ({
         title:{text:'', important: true, focused: false},
         description:{text:'', important: false, focused: false},
         image:{text:'', important: true, focused: false},
-        price:{text:'', important: true, focused: false},
+        price:{text: 0, important: true, focused: false},
       }
     }
   },
@@ -58,11 +58,23 @@ export default ({
     },
     addGood() {
       let storeGood = new Good(
-        this.inputs.title.text, this.inputs.description.text, this.inputs.image.text, this.inputs.price.text, this.getId
+        this.fitString(this.inputs.title.text),
+        this.fitString(this.inputs.description.text),
+        this.inputs.image.text,
+        this.inputs.price.text,
+        this.getId,
       )
       this.$store.commit('goods/addGood', storeGood);
       this.clear();
     },
+    fitString(value) {
+      if (value !== '') {
+        let string = value[0].toUpperCase() + value.slice(1)
+        return string.trim()
+      } else {
+        return 'Нет описания товара'
+      }
+    }
   },
   computed: {
     validate() {
@@ -88,6 +100,9 @@ export default ({
   .form-container
     position: fixed
     left: 32px
+    @media (max-width: 550px)
+      left: 20px
+
 
   .attention
     margin-top: -10px
@@ -106,6 +121,18 @@ export default ({
     padding: 24px 24px
     width: 332px
 
+    @media (max-width: 1000px)
+      padding: 24px 12px
+      width: 250px
+    @media (max-width: 700px)
+      width: 200px
+    @media (max-width: 550px)
+      padding: 24px 16px
+      width: 166px
+    @media (max-width: 360px)
+      padding: 24px 16px
+      width: 136px
+
   .form__input
     width: 100%
     padding: 10px 16px
@@ -116,6 +143,9 @@ export default ({
     &:focus
       outline: none
       box-shadow: 0 0 0 1pt#FF8484 !important
+    @media (max-width: 550px)
+      padding: 5px 8px
+      margin-bottom: 8px
 
   .form__textarea
     position: relative
@@ -126,6 +156,8 @@ export default ({
     font-size: 12px
     color: $placeholder
     font-weight: 600px
+    @media (max-width: 700px)
+      font-size: 10px
 
   .form__input-name
     display: block

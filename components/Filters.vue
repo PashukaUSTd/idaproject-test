@@ -25,8 +25,7 @@ export default {
   },
   methods: {
     sort() {
-      console.log(this.selectedOption.value, this.selectedOption.min)
-      this.$store.commit('goods/sortByProp', this.selectedOption.value, this.selectedOption.min);
+      this.$store.commit('goods/sortByProp', this.selectedOption);
     }
   },
   computed: {
@@ -34,7 +33,7 @@ export default {
       return options;
     },
     selectedOption() {
-      return this.options.filter(e => e.id === this.selected)
+      return this.options.filter(e => e.id === this.selected).find(e => e.id)
     },
   }
 }
@@ -52,6 +51,8 @@ export default {
     box-shadow: $input__box-shadow
     border-radius: 4px
     cursor: pointer
+    @media (max-width: 550px)
+      padding: 10px 8px 10px 4px
 
   .focused
     box-shadow: 0 0 0 1pt #FF8484
@@ -66,4 +67,7 @@ export default {
     cursor: pointer
     &:focus
       outline: none
+    @media (max-width: 450px)
+      font-size: 10px
+      line-height: 12px
 </style>
