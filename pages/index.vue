@@ -30,6 +30,9 @@ export default {
 
   .title
     width: 80%
+    font-weight: 400
+    color: #3F3F3F
+
     @media (max-width: 550px)
       font-size: 24px
 
